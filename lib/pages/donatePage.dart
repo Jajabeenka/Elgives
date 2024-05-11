@@ -38,10 +38,10 @@ class _FormSampleState extends State<FormSample> {
   void resetFields() {
   setState(() {
     categories = []; 
-    pickupOrDropOff = "PickUp"; 
+    pickupOrDropOff = "Pickup"; 
     weight = ""; 
     photo = null; 
-    dateTime = DateTime.now(); 
+    dateTime = DateTime.now();
     addresses = []; 
     contact = "";
   });
@@ -56,33 +56,25 @@ class _FormSampleState extends State<FormSample> {
       },
     );
   });
-  setState(() {
-    dateTime = DateTime.now();
-  });
-  setState(() {
-    dateTime = DateTime(
-      TimeOfDay.now().hour,
-      TimeOfDay.now().minute,
-    );
-  });
 }
 
   late Mode pickDrop;
-
+  
   @override
   Widget build(BuildContext context) {
+    DateTime initialDateTime = DateTime.now();
     pickDrop = Mode(
-      initialValue: 'Pickup', //initial value
+      initialValue: 'Pickup', 
       onChanged: (value) {
         setState(() {
-          pickupOrDropOff = value; // Update superpower
+          pickupOrDropOff = value; 
         });
       },
     );
 
     return Scaffold(
       // margin: EdgeInsets.all(20),
-      drawer: DrawerWidget(text: "Slambook"),
+      drawer: DrawerWidget(text: "Organization"),
       appBar: AppBar(
         title: Text(
           "Donate Page",
@@ -96,6 +88,7 @@ class _FormSampleState extends State<FormSample> {
           key: _formKey,
           child: Column(
             children: [
+              SizedBox(height: 30,),
               Text(
                 'NAME OR ORG',
                 style: TextStyle(
@@ -121,12 +114,14 @@ class _FormSampleState extends State<FormSample> {
               Date((date) {
                 setState(() {
                   dateTime = DateTime(
-                    dateTime.year,
-                    dateTime.month,
-                    dateTime.day,
+                    date.year,
+                    date.month,
+                    date.day,
+                    dateTime.hour,
+                    dateTime.minute,
                   );
                 });
-              }),
+              }, dateTime: dateTime),
               Time((time) {
                 setState(() {
                   dateTime = DateTime(
@@ -137,7 +132,7 @@ class _FormSampleState extends State<FormSample> {
                     time.minute,
                   );
                 });
-              }),
+              }, dateTime: dateTime),
               Address((addressList) {
                 setState(() {
                   addresses = addressList;
@@ -153,36 +148,43 @@ class _FormSampleState extends State<FormSample> {
                 child: OutlinedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all<Color>(Color.fromARGB(255, 71, 73, 195)!),
+                        MaterialStateProperty.resolveWith<Color?>((states) {
+                      if (states.contains(MaterialState.disabled)) {
+                        return Colors.grey;
+                      }
+                      return Color.fromARGB(255, 71, 73, 195);
+                      }),
                   ),
-                  onPressed: () {
-                    // if inputs are valid, then show text
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState?.save();
-                      Donation donation = (Donation(
-                        categories: categories,
-                        pickupOrDropOff: pickupOrDropOff,
-                        weight: weight,
-                        // photo: ,
-                        dateTime: dateTime,
-                        addresses: addresses,
-                        contactNumber: contact,
-                      ));
-                      setState(() {
-                        showText = true;
-                      });
-                      context
-                          .read<DonationProvider>()
-                          .addDonation(donation);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text("Donation added!"),
-                        duration:
-                            const Duration(seconds: 1, milliseconds: 100),
-                      ));
-                    }
-                  },
+                  onPressed: 
+                  (dateTime.isBefore(DateTime.now())) || addresses.isEmpty
+                    ? null :
+                     () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState?.save();
+                          Donation donation = Donation(
+                            categories: categories,
+                            pickupOrDropOff: pickupOrDropOff,
+                            weight: weight,
+                            photo: "",
+                            dateTime: dateTime,
+                            addresses: addresses,
+                            contactNumber: contact,
+                          );
+                          setState(() {
+                            showText = true;
+                          });
+                          context.read<DonationProvider>().addDonation(donation);
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Donation added!"),
+                              duration: const Duration(seconds: 1, milliseconds: 100),
+                            ),
+                          );
+                        }
+                      },
                   child: Text(
-                    "Submit",
+                    "Donate",
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
@@ -205,9 +207,16 @@ class _FormSampleState extends State<FormSample> {
                       showText = false;
                       // Status.resetStat(stat);
                     });
+                    Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Donation cancelled!"),
+                              duration: const Duration(seconds: 1, milliseconds: 100),
+                            ),
+                    );
                   },
                   child: Text(
-                    "Reset",
+                    "Cancel",
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),

@@ -15,28 +15,39 @@ class _contactNumberState extends State<contactNumber> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.white), 
+        color: Color.fromARGB(255, 5, 85, 26),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFormField(
-            style: TextStyle(color: Color.fromARGB(255, 168, 202, 235)),
-            onSaved: (val) {
-              print("Text value: ${val!}");
-            },
-            validator: (val) {
-              // we used the val parameter for checking instead of the value inside the variable
-              if (val == null || val.isEmpty) return "Enter an contactNumber";
-              if (int.tryParse(val) == null) return "Enter a valid contactNumber";
-            },
-            // an onChanged property is placed to call the callback function
-            onChanged: (value) {
-              // we're not going to save the value of the text inside a separate variable anymore because we're going to pass it directly to the parent widget
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: TextFormField(
+              style: TextStyle(
+                color: Colors.yellow.shade600, 
+                fontSize: 16,
+              ),
+              onSaved: (val) {
+                print("Text value: ${val!}");
+              },
+              validator: (val) {
+                if (val == null || val.isEmpty) return "Enter a contactNumber";
+                if (int.tryParse(val) == null) return "Enter a valid contactNumber";
+                return null;
+              },
+              onChanged: (value) {
               widget.callback(value);
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "contactNumber",
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                labelText: "Contact Number",
                 hintText: "Enter your contactNumber",
-                hintStyle: TextStyle(color: Color.fromARGB(225, 94, 99, 104))),
+                hintStyle: TextStyle(color: Colors.grey), 
+              ),
+            ),
           ),
         ],
       ),

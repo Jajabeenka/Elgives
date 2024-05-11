@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 class Organization {
-  String name;   //string,  since uid of user is a string
+  String name;  
   String description;
   bool status;
 

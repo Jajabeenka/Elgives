@@ -15,28 +15,48 @@ class _WeightState extends State<Weight> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey.shade400),
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextFormField(
-            style: TextStyle(color: Color.fromARGB(255, 168, 202, 235)),
-            onSaved: (val) {
-              print("Text value: ${val!}");
-            },
-            validator: (val) {
-              // we used the val parameter for checking instead of the value inside the variable
-              if (val == null || val.isEmpty) return "Enter an Weight";
-              if (int.tryParse(val) == null) return "Enter a valid Weight";
-            },
-            // an onChanged property is placed to call the callback function
-            onChanged: (value) {
-              // we're not going to save the value of the text inside a separate variable anymore because we're going to pass it directly to the parent widget
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Text(
+              'Enter Weight:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: TextFormField(
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+              onSaved: (val) {
+                print("Text value: ${val!}");
+              },
+              validator: (val) {
+                if (val == null || val.isEmpty) return "Enter a Weight";
+                if (int.tryParse(val) == null) return "Enter a valid Weight";
+                return null;
+              },
+              onChanged: (value) {
               widget.callback(value);
-            },
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Weight",
+              },
+              decoration: InputDecoration(
+                border: InputBorder.none,
                 hintText: "Enter your Weight",
-                hintStyle: TextStyle(color: Color.fromARGB(225, 94, 99, 104))),
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+            ),
           ),
         ],
       ),

@@ -15,12 +15,12 @@ class Item extends StatefulWidget {
 }
 
 class _ItemState extends State<Item> {
-  late List<String> _ItemOptions;
+  late List<String> _itemOptions;
 
   @override
   void initState() {
     super.initState();
-    _ItemOptions = [
+    _itemOptions = [
       "Foods",
       "Clothes",
       "Cash",
@@ -32,30 +32,62 @@ class _ItemState extends State<Item> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          for (var Item in _ItemOptions)
-            CheckboxListTile(
-              title: Text(
-                Item,
-                style: TextStyle(color: Color.fromARGB(255, 168, 202, 235)),
-              ),
-              value: widget.selectedOptions.contains(Item),
-              onChanged: (bool? checked) {
-                setState(() {
-                  if (checked!) {
-                    widget.selectedOptions.add(Item);
-                  } else {
-                    widget.selectedOptions.remove(Item);
-                  }
-                });
-                widget.onChanged(widget.selectedOptions);
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-              activeColor: Colors.blue, // Customize the color if needed
+          Text(
+            'Select Items:',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue,
             ),
+          ),
+          SizedBox(height: 15),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: _itemOptions.map((item) {
+              return FilterChip(
+                label: Text(
+                  item,
+                  style: TextStyle(
+                    color: widget.selectedOptions.contains(item)
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                ),
+                backgroundColor: widget.selectedOptions.contains(item)
+                    ? Colors.blue
+                    : Colors.grey[300],
+                selected: widget.selectedOptions.contains(item),
+                onSelected: (bool value) {
+                  setState(() {
+                    if (value) {
+                      widget.selectedOptions.add(item);
+                    } else {
+                      widget.selectedOptions.remove(item);
+                    }
+                  });
+                  widget.onChanged(widget.selectedOptions);
+                },
+              );
+            }).toList(),
+          ),
         ],
       ),
     );
