@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:week9_authentication/pages/splash_screen.dart';
 import 'firebase_options.dart';
 import 'pages/home_page.dart';
 import 'providers/todo_provider.dart';
@@ -32,7 +33,9 @@ class MyApp extends StatelessWidget {
       title: 'SimpleTodo',
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
+        // '/': (context) => const HomePage(),
+        '/': (context) => const SplashScreen(),
+
       },
       theme: ThemeData(
         primarySwatch: MaterialColor(0xFF00FF00, { // Green color for primary swatch

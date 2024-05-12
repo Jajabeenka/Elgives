@@ -25,7 +25,7 @@ class _SignInPageState extends State<SignInPage> {
       backgroundColor: Color.fromARGB(255, 141, 20, 54), // Use primary color from theme
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 100, horizontal: 30),
+          margin: const EdgeInsets.symmetric(vertical: 80, horizontal: 30),
           child: Form(
             key: _formKey,
             child: Column(
