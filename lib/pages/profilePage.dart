@@ -14,8 +14,8 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Profile'),
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        backgroundColor: Color(0xFF01563F),
+        foregroundColor: Color(0xFFFFC107),
       ),
       extendBodyBehindAppBar: true,
       drawer: DrawerWidget(),

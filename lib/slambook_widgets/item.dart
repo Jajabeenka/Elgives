@@ -54,7 +54,7 @@ class _ItemState extends State<Item> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: Color(0xFF01563F),
             ),
           ),
           SizedBox(height: 15),
@@ -68,12 +68,12 @@ class _ItemState extends State<Item> {
                   style: TextStyle(
                     color: widget.selectedOptions.contains(item)
                         ? Colors.white
-                        : Colors.black,
+                        : Color(0xFFFFC107),
                   ),
                 ),
                 backgroundColor: widget.selectedOptions.contains(item)
                     ? Colors.blue
-                    : Colors.grey[300],
+                    : Color(0xFF01563F),
                 selected: widget.selectedOptions.contains(item),
                 onSelected: (bool value) {
                   setState(() {

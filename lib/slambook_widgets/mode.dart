@@ -34,48 +34,73 @@ class _ModeState extends State<Mode> {
       margin: EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade400),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
               'Select Mode:',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                color: Color(0xFF01563F),
               ),
             ),
           ),
-          DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              border: InputBorder.none,
-            ),
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            ),
-            value: _dropdownValue,
-            items: Mode._dropdownOptions.map((option) {
-              return DropdownMenuItem<String>(
-                child: Text(
-                  option,
-                  style: TextStyle(color: Colors.black),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10), 
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: Color(0xFF8D1436),
+                    width: 2,
+                  ),
                 ),
-                value: option,
-              );
-            }).toList(),
-            onChanged: (val) {
-              setState(() {
-                _dropdownValue = val!;
-              });
-              widget.onChanged(val!);
-            },
-          )
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: Color(0xFF8D1436),
+                    width: 2,
+                  ),
+                ),
+              ),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+              value: _dropdownValue,
+              items: Mode._dropdownOptions.map((option) {
+                return DropdownMenuItem<String>(
+                  child: Text(
+                    option,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  value: option,
+                );
+              }).toList(),
+              onChanged: (val) {
+                setState(() {
+                  _dropdownValue = val!;
+                });
+                widget.onChanged(val!);
+              },
+            ),
+          ),
+          SizedBox(height: 10),
         ],
       ),
     );

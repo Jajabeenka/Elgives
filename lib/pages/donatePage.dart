@@ -78,11 +78,13 @@ class _FormSampleState extends State<FormSample> {
       appBar: AppBar(
         title: Text(
           "Donate Page",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 168, 202, 235)),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFFFC107),
+          ),
         ),
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 168, 202, 235)),
+        backgroundColor: Color(0xFF01563F),
+        iconTheme: IconThemeData(color: Color(0xFF8D1436)),
       ),
-      backgroundColor: Color.fromARGB(255, 5, 12, 49), //
+      backgroundColor: Color(0xFF8D1436), //
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -90,11 +92,11 @@ class _FormSampleState extends State<FormSample> {
             children: [
               SizedBox(height: 30,),
               Text(
-                'NAME OR ORG',
+                'NAME OF ORG',
                 style: TextStyle(
                   fontSize: 27.0,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 168, 202, 235),
+                  color: Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
               Item(
@@ -143,84 +145,86 @@ class _FormSampleState extends State<FormSample> {
                   contact = value;
                 });
               }),
-              Container(
-                margin: EdgeInsets.all(20),
-                child: OutlinedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.resolveWith<Color?>((states) {
-                      if (states.contains(MaterialState.disabled)) {
-                        return Colors.grey;
+              ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: (dateTime.isBefore(DateTime.now())) || addresses.isEmpty
+                    ? Colors.grey.shade400
+                    : Color.fromARGB(255, 80, 196, 90),
+                disabledBackgroundColor: Colors.grey.shade400,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: (dateTime.isBefore(DateTime.now())) || addresses.isEmpty || addresses.contains("")
+                  ? null
+                  : () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState?.save();
+                        Donation donation = Donation(
+                          categories: categories,
+                          pickupOrDropOff: pickupOrDropOff,
+                          weight: weight,
+                          photo: "",
+                          dateTime: dateTime,
+                          addresses: addresses,
+                          contactNumber: contact,
+                        );
+                        setState(() {
+                          showText = true;
+                        });
+                        context.read<DonationProvider>().addDonation(donation);
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Donation added!"),
+                            duration: const Duration(seconds: 1, milliseconds: 100),
+                          ),
+                        );
                       }
-                      return Color.fromARGB(255, 71, 73, 195);
-                      }),
-                  ),
-                  onPressed: 
-                  (dateTime.isBefore(DateTime.now())) || addresses.isEmpty
-                    ? null :
-                     () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState?.save();
-                          Donation donation = Donation(
-                            categories: categories,
-                            pickupOrDropOff: pickupOrDropOff,
-                            weight: weight,
-                            photo: "",
-                            dateTime: dateTime,
-                            addresses: addresses,
-                            contactNumber: contact,
-                          );
-                          setState(() {
-                            showText = true;
-                          });
-                          context.read<DonationProvider>().addDonation(donation);
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Donation added!"),
-                              duration: const Duration(seconds: 1, milliseconds: 100),
-                            ),
-                          );
-                        }
-                      },
-                  child: Text(
-                    "Donate",
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                    },
+                child: Text(
+                  "Donate",
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 7, 6, 0),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
-              Divider(
-                color: Colors.blue,
-                thickness: 3.5,
-                height: 10,
-              ),
+              SizedBox(height: 10,),
               Container(
                 margin: EdgeInsets.all(20),
-                child: OutlinedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red.shade700,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                   onPressed: () {
                     _formKey.currentState!.reset();
-                    resetFields(); // Reset
+                    resetFields();
                     setState(() {
                       showText = false;
-                      // Status.resetStat(stat);
                     });
                     Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Donation cancelled!"),
-                              duration: const Duration(seconds: 1, milliseconds: 100),
-                            ),
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Donation cancelled!"),
+                        duration: const Duration(seconds: 1, milliseconds: 100),
+                      ),
                     );
                   },
                   child: Text(
                     "Cancel",
-                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(
+                      color: Color(0xFFFFC107),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),

@@ -10,15 +10,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class OrgsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Stream<QuerySnapshot> donationsListStream = context.watch<OrganizationProvider>().organization;
+    Stream<QuerySnapshot> donationsListStream =
+        context.watch<OrganizationProvider>().organization;
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'Organizations',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 168, 202, 235)),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFFFC107),
+          ),
         ),
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 168, 202, 235)),
+        iconTheme: IconThemeData(color: Color(0xFF8D1436)),
+        backgroundColor: Color(0xFF01563F),
       ),
+      backgroundColor: Color(0xFF8D1436),
       drawer: DrawerWidget(),
       body: StreamBuilder(
         stream: donationsListStream,
@@ -33,18 +39,18 @@ class OrgsPage extends StatelessWidget {
             );
           } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Column(
+              child: Column( 
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(Icons.group, size: 80, color: Colors.blue),
+                  Icon(Icons.group, size: 80, color: Colors.blue.shade800),
                   SizedBox(height: 20),
                   Text(
                     'NO ORGANIZATIONS YET!',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 5, 12, 49),
+                      color: Colors.blue.shade800,
                     ),
                   ),
                   SizedBox(height: 20),
@@ -53,6 +59,12 @@ class OrgsPage extends StatelessWidget {
                       Navigator.pushNamed(context, '/');
                     },
                     child: Text('GO BACK TO SIGN IN'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue.shade700,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -66,15 +78,21 @@ class OrgsPage extends StatelessWidget {
               var id = snapshot.data?.docs[index].id;
               return Card(
                 elevation: 3,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: ListTile(
                   leading: CircleAvatar(
-                    child: Icon(Icons.person),
-                    backgroundColor: Colors.blue,
+                    child: Icon(Icons.person, color: Color(0xFFFFC107)),
+                    backgroundColor: Color(0xFF01563F),
                   ),
                   title: Text(
                     org.name,
-                    style: TextStyle(color: Color.fromARGB(255, 8, 37, 66)),
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 120, 90, 0),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   onTap: () {
                     Navigator.push(
