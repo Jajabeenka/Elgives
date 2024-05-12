@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
       title: 'Flutter Demo',
       theme: ThemeData( test our application.
         //
-        // TRY THIS: Try running your application with "flutter run". You'll see
+        // TRY THIS: Try running yourfdsgsdfg application with "flutter run". You'll see
         // the application has a purple toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
         // and then invoke "hot reload" (save your changes or press the "hot
@@ -37,7 +37,7 @@ class MyApp extends StatefulWidget {
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
-  }yo
+  }
 }
 
 class MyHomePage extends StatefulWidget {
