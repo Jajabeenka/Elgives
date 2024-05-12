@@ -1,6 +1,6 @@
 {
-    "name": "elgives",
-    "short_name": "elgives",
+    "name": "week9_authentication",
+    "short_name": "week9_authentication",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
