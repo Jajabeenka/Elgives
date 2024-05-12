@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({Key? key});
 
   @override
   State<SignUpPage> createState() => _SignUpState();
@@ -11,12 +11,14 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
+  String? name;
+  String? username;
   String? email;
   String? password;
-  String? fname;
-  String? lname;
+  List<String>? addresses = []; // Change addresses to List<String>
+  String? contactNumber;
 
-// RegExp: This is a class in Dart used for representing regular expressions.
+  // RegExp: This is a class in Dart used for representing regular expressions.
   bool isValidEmail(String email) {
     return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
   }
@@ -43,32 +45,35 @@ class _SignUpState extends State<SignUpPage> {
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
-            margin: const EdgeInsets.all(30),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  heading,
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFFC107), // Yellow background color
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        emailField,
-                        passwordField,
-                        firstNameField,
-                        lastNameField,
-                      ],
-                    ),
+          margin: const EdgeInsets.all(30),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                heading,
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFC107),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  submitButton
-                ],
-              ),
-            )),
+                  child: Column(
+                    children: [
+                      nameField,
+                      userNameField,
+                      emailField,
+                      passwordField,
+                      addressField,
+                      contactNumberField,
+                    ],
+                  ),
+                ),
+                submitButton
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -80,170 +85,244 @@ class _SignUpState extends State<SignUpPage> {
           style: TextStyle(
             fontSize: 40,
             fontWeight: FontWeight.bold,
-            color: Colors.white, // Use yellow text color from theme
+            color: Colors.white,
           ),
         ),
       );
+
+  Widget get nameField => Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      decoration: InputDecoration(
+        labelText: "Name",
+        hintText: "Enter your name",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      onSaved: (value) => setState(() => name = value),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Name cannot be empty";
+        }
+        return null;
+      },
+    ),
+  );
+
+  Widget get userNameField => Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      decoration: InputDecoration(
+        labelText: "Username",
+        hintText: "Enter your username",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      onSaved: (value) => setState(() => username = value),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Username cannot be empty";
+        }
+        return null;
+      },
+    ),
+  );
 
   Widget get emailField => Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: TextFormField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            labelText: "Email",
-            hintText: "juandelacruz09@gmail.com",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.black),
-            ),
-            labelStyle: const TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          onSaved: (value) => setState(() => email = value),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please enter your email";
-            } else if (!isValidEmail(value)) {
-              return "Please enter a valid email format";
-            }
-            return null;
-          },
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        labelText: "Email",
+        hintText: "juandelacruz09@gmail.com",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
         ),
-      );
-
-Widget get passwordField => Padding(
-  padding: const EdgeInsets.only(bottom: 20),
-  child: TextFormField(
-    obscureText: true,
-    decoration: InputDecoration(
-      filled: true,
-      fillColor: Colors.white,
-      labelText: "Password", // Use 'labelText' instead of 'label'
-      hintText: "At least 6 characters",
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.black),
+        ),
+        labelStyle: const TextStyle(
+          color: Colors.black,
+        ),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black),
-      ),
-      labelStyle: TextStyle(
-        color: Colors.black,
-      ),
+      onSaved: (value) => setState(() => email = value),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Please enter your email";
+        } else if (!isValidEmail(value)) {
+          return "Please enter a valid email format";
+        }
+        return null;
+      },
     ),
-    onSaved: (value) => setState(() => password = value),
-    validator: (value) {
-      if (value == null ||
-          value.isEmpty ||
-          value.length < 6 ||
-          !isValidPassword(value)) {
-        return "Password must be at least 6 characters and contain letters, numbers, and special characters.";
-      }
-      return null;
-    },
-  ),
-);
+  );
 
-Widget get firstNameField => Padding(
-  padding: const EdgeInsets.only(bottom: 20),
-  child: TextFormField(
-    decoration: InputDecoration(
-      labelText: "First Name",
-      hintText: "Enter a valid First Name",
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
+  Widget get passwordField => Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      obscureText: true,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        labelText: "Password",
+        hintText: "At least 6 characters",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black),
-      ),
-      labelStyle: TextStyle(
-        color: Colors.black,
-      ),
-      filled: true,
-      fillColor: Colors.white,
+      onSaved: (value) => setState(() => password = value),
+      validator: (value) {
+        if (value == null ||
+            value.isEmpty ||
+            value.length < 6 ||
+            !isValidPassword(value)) {
+          return "Password must be at least 6 characters and contain letters, numbers, and special characters.";
+        }
+        return null;
+      },
     ),
-    onSaved: (value) => setState(() => fname = value),
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "First Name cannot be empty";
-      }
-      return null;
-    },
-  ),
-);
+  );
 
-Widget get lastNameField => Padding(
-  padding: const EdgeInsets.only(bottom: 20),
-  child: TextFormField(
-    decoration: InputDecoration(
-      labelText: "Last Name",
-      hintText: "Enter a Last Name",
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
+  Widget get addressField => Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      decoration: InputDecoration(
+        labelText: "Address",
+        hintText: "Enter an address",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
+        filled: true,
+        fillColor: Colors.white,
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black54),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: Colors.black),
-      ),
-      labelStyle: TextStyle(
-        color: Colors.black,
-      ),
-      filled: true,
-      fillColor: Colors.white,
-    ),
-    onSaved: (value) => setState(() => lname = value),
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return "Last Name cannot be empty";
-      }
-      return null;
-    },
-  ),
-);
-
-  Widget get submitButton => ElevatedButton(
-      onPressed: () async {
-        if (_formKey.currentState!.validate()) {
-          _formKey.currentState!.save();
-          // separate provider file
-          try {
-            await context
-                .read<UserAuthProvider>()
-                .authService
-                // modified
-                .signUp(email!, password!, fname!, lname!);
-          } catch (e) {
-            // Handle sign-up errors
-            _showSnackBar("Sign-up failed: $e");
-          }
-          // check if the widget hasn't been disposed of after an asynchronous action
-          if (mounted) Navigator.pop(context);
+      onSaved: (value) {
+        if (value != null && value.isNotEmpty) {
+          setState(() {
+            addresses!.add(value); // Add address to the addresses list
+          });
         }
       },
-      child: const Text("Sign Up"));
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Address cannot be empty";
+        }
+        return null;
+      },
+    ),
+  );
+
+  Widget get contactNumberField => Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: TextFormField(
+      decoration: InputDecoration(
+        labelText: "Contact Information",
+        hintText: "Enter phone number",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black54),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.black),
+        ),
+        labelStyle: TextStyle(
+          color: Colors.black,
+        ),
+        filled: true,
+        fillColor: Colors.white,
+      ),
+      onSaved: (value) => setState(() => contactNumber = value),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "Contact number cannot be empty";
+        }
+        return null;
+      },
+    ),
+  );
+
+  Widget get submitButton => ElevatedButton(
+    onPressed: () async {
+      if (_formKey.currentState!.validate()) {
+        _formKey.currentState!.save();
+        // separate provider file
+        try {
+          await context
+              .read<UserAuthProvider>()
+              .authService
+              .signUp(name!, username!, email!, password!, addresses!, contactNumber!); // Pass addresses list to signUp method
+        } catch (e) {
+          // Handle sign-up errors
+          _showSnackBar("Sign-up failed: $e");
+        }
+        // check if the widget hasn't been disposed of after an asynchronous action
+        if (mounted) Navigator.pop(context);
+      }
+    },
+    child: const Text("Sign Up"),
+  );
 }

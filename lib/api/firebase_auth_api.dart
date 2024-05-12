@@ -35,7 +35,12 @@ class FirebaseAuthAPI {
     }
   }
 
-  Future<void> signUp(String email, String password, String fname, String lname) async {
+  Future<void> signUp(  String name,
+  String username,
+  String email,
+  String password,
+  List<String> addresses,
+  String contactNumber,) async {
     UserCredential credential;
     try {
       // papasa lang paggawa method
@@ -44,10 +49,12 @@ class FirebaseAuthAPI {
         password: password, 
       );
       // add fname and lname
-    await FirebaseFirestore.instance.collection('users').doc(credential.user!.uid).set({
-      'firstName': fname,
-      'lastName': lname,
-      'email': email,
+    await FirebaseFirestore.instance.collection('donors').doc(credential.user!.uid).set({
+      'name': name, // Store user's full name
+        'username': username,
+        'email': email,
+        'addresses': addresses, // Store user's addresses as a list
+        'contactNumber': contactNumber,
     });
 
 //let's print the object returned by signInWithEmailAndPassword
