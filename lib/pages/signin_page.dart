@@ -156,7 +156,6 @@ Widget get passwordField => TextFormField(
       );
 
   Widget get submitButton => ElevatedButton(
-    
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
@@ -174,7 +173,7 @@ Widget get passwordField => TextFormField(
           }
         },
         style:  ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 6, 104, 14), // Button background color
+          backgroundColor: Color(0xFF01563F), // Button background color
           textStyle: TextStyle(color: Colors.white), // Text color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -201,7 +200,7 @@ Widget get passwordField => TextFormField(
   Widget GoogleSignInButton() => ElevatedButton(
         onPressed: () async {},
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromARGB(255, 6, 104, 14), // Button background color
+          backgroundColor: Color(0xFF01563F), // Button background color
           textStyle: TextStyle(color: Colors.white), // Text color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners

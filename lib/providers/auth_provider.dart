@@ -26,7 +26,6 @@ Future<void> signUp(
   String email,
   String password,
   List<String> addresses,
-  String fname,
   String contactNumber,
 ) async {
   await authService.signUp(
