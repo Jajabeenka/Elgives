@@ -39,6 +39,25 @@ Future<void> signUp(
   notifyListeners();
 }
 
+Future<void> orgSignUp(
+  String organizationName,
+  String description,
+  String contactInformation,
+  String email,
+  String password,
+  String proofOfLegitimacy,
+) async {
+  await authService.orgSignUp(
+organizationName,
+   description,
+   contactInformation,
+   email,
+   password,
+   proofOfLegitimacy,
+  );
+  notifyListeners();
+}
+
   Future<void> signIn(String email, String password) async {
     await authService.signIn(email, password);
     notifyListeners();

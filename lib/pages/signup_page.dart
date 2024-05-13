@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:week9_authentication/pages/organization_signup.dart';
+import 'package:week9_authentication/pages/signin_page.dart';
 import '../providers/auth_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -44,9 +45,12 @@ class _SignUpState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 141, 20, 54),
-      appBar: AppBar( title: Text(
+      appBar: AppBar(
+        title: Text(
           "Donor Sign Up Page",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFFFFC107),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFFFFC107),
           ),
         ),
         iconTheme: IconThemeData(color: Color.fromARGB(255, 168, 202, 235)),
@@ -84,6 +88,7 @@ class _SignUpState extends State<SignUpPage> {
                 SizedBox(height: 15.0), // Spacing between icon and text
 
                 GoogleSignInButton(),
+                signInButton(),
               ],
             ),
           ),
@@ -346,8 +351,7 @@ class _SignUpState extends State<SignUpPage> {
           }
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              Color(0xFF01563F), // Button background color
+          backgroundColor: Color(0xFF01563F), // Button background color
           textStyle: TextStyle(color: Colors.white), // Text color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -404,8 +408,7 @@ class _SignUpState extends State<SignUpPage> {
   Widget GoogleSignInButton() => ElevatedButton(
         onPressed: () async {},
         style: ElevatedButton.styleFrom(
-          backgroundColor:
-              Color(0xFF01563F), // Button background color
+          backgroundColor: Color(0xFF01563F), // Button background color
           textStyle: TextStyle(color: Colors.white), // Text color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0), // Rounded corners
@@ -431,4 +434,34 @@ class _SignUpState extends State<SignUpPage> {
           ],
         ),
       );
+
+  Widget signInButton() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Already have an account?",
+            style: TextStyle(color: Colors.white),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => SignInPage()),
+              );
+            },
+            child: Text(
+              "Sign In",
+              style: TextStyle(
+                color: Color(0xFFFFC107),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

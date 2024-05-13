@@ -74,6 +74,50 @@ class FirebaseAuthAPI {
       print(e);
     }
   }
+
+Future<void> orgSignUp(
+  String organizationName,
+  String description,
+  String email,
+  String password,
+  String contactNumber,
+  String proofOfLegitimacy,
+) async {
+  try {
+    // Create user with email and password
+    UserCredential credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // Store user information in Firestore under 'organizations' collection
+    await FirebaseFirestore.instance.collection('organizations').doc(credential.user!.uid).set({
+      'organizationName': organizationName,
+      'description': description,
+      'email': email,
+      'contactNumber': contactNumber,
+      'proofOfLegitimacy': proofOfLegitimacy,
+    });
+
+    // Print the user credential object for debugging or tracking purposes
+    print(credential);
+  } on FirebaseAuthException catch (e) {
+    // Handle specific FirebaseAuth errors
+    if (e.code == 'weak-password') {
+      print('The password provided is too weak.');
+    } else if (e.code == 'email-already-in-use') {
+      print('The account already exists for that email.');
+    } else if (e.code == 'invalid-email') {
+      print('Invalid email address');
+    } else {
+      print('FirebaseAuthException occurred: $e');
+    }
+  } catch (e) {
+    // Handle other exceptions
+    print('Error occurred during organization sign-up: $e');
+  }
+}
+
 Future<void> signOut() async {
   await auth.signOut();
 }
