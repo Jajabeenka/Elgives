@@ -1,16 +1,27 @@
-# elgives
+# Week #: Topic
 
-A new Flutter project.
+**Name:** Your Name <br/>
+**Section:** U-#L <br/>
+**Student number:** 2018 - 12345 <br/>
 
-## Getting Started
+## Code Description
 
-This project is a starting point for a Flutter application.
+Describe what your code does here
 
-A few resources to get you started if this is your first Flutter project:
+## Things you did in the code
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Describe what you did here
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Challenges encountered
+
+Describe your challenges here
+
+## Commit Log
+
+1. Initial commit
+2.
+
+## References
+
+- https://stackoverflow.com/questions/70288809/how-to-use-email-validator-to-validate-an-email-address
+- https://stackoverflow.com/questions/56253787/how-to-handle-textfield-validation-in-password-in-flutter
