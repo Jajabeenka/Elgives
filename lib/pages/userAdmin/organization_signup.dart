@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week9_authentication/pages/organization_signup.dart';
-import 'package:week9_authentication/pages/signin_page.dart';
-import '../providers/auth_provider.dart';
+import 'package:week9_authentication/pages/userAdmin/signin_page.dart';
+import 'package:week9_authentication/pages/userAdmin/signup_page.dart';
+import '../../providers/auth_provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key});
+class OrganizationSignUpPage extends StatefulWidget {
+  const OrganizationSignUpPage({Key? key});
 
   @override
-  State<SignUpPage> createState() => _SignUpState();
+  State<OrganizationSignUpPage> createState() => _OrganizationSignUpPageState();
 }
 
-class _SignUpState extends State<SignUpPage> {
+class _OrganizationSignUpPageState extends State<OrganizationSignUpPage> {
   final _formKey = GlobalKey<FormState>();
-  String? name;
-  String? username;
+  String? organizationName;
+  String? description;
+  String? contactInformation;
   String? email;
   String? password;
-  List<String>? addresses = []; // Change addresses to List<String>
-  String? contactNumber;
+  String? proofOfLegitimacy; // This can be a file upload field
 
-  // RegExp: This is a class in Dart used for representing regular expressions.
+  // RegExp for email validation
   bool isValidEmail(String email) {
     return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email);
   }
 
+  // RegExp for password validation
   bool isValidPassword(String password) {
     return RegExp(
             r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{6,}$')
@@ -66,6 +67,7 @@ class _SignUpState extends State<SignUpPage> {
               children: [
                 heading,
                 OrganizationSignUpButton,
+                SizedBox(height: 10.0),
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -74,19 +76,18 @@ class _SignUpState extends State<SignUpPage> {
                   ),
                   child: Column(
                     children: [
-                      nameField,
-                      userNameField,
+                      organizationNameField,
+                      descriptionField,
+                      contactInformationField,
                       emailField,
                       passwordField,
-                      addressField,
-                      contactNumberField,
+                      proofOfLegitimacyField,
                     ],
                   ),
                 ),
-                SizedBox(height: 26.0), // Spacing between icon and text
+                SizedBox(height: 26.0), // Spacing between fields and buttons
                 submitButton,
-                SizedBox(height: 15.0), // Spacing between icon and text
-
+                SizedBox(height: 15.0), // Additional spacing
                 GoogleSignInButton(),
                 signInButton(),
               ],
@@ -100,77 +101,81 @@ class _SignUpState extends State<SignUpPage> {
   Widget get heading => Padding(
         padding: const EdgeInsets.only(bottom: 0),
         child: Text(
-          "Sign Up",
+          "Organization Sign Up",
           style: TextStyle(
-            fontSize: 40,
+            fontSize: 33,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
       );
 
-  Widget get nameField => Padding(
+  Widget get organizationNameField => Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: TextFormField(
           decoration: InputDecoration(
-            labelText: "Name",
-            hintText: "Enter your name",
+            labelText: "Organization Name",
+            hintText: "Enter organization name",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.black54),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
+            // Additional styling
             filled: true,
             fillColor: Colors.white,
           ),
-          onSaved: (value) => setState(() => name = value),
+          onSaved: (value) => setState(() => organizationName = value),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Name cannot be empty";
+              return "Organization name cannot be empty";
             }
             return null;
           },
         ),
       );
 
-  Widget get userNameField => Padding(
+  Widget get descriptionField => Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: TextFormField(
           decoration: InputDecoration(
-            labelText: "Username",
-            hintText: "Enter your username",
+            labelText: "Description",
+            hintText: "Enter organization description",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.black54),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
+            // Additional styling
             filled: true,
             fillColor: Colors.white,
           ),
-          onSaved: (value) => setState(() => username = value),
+          onSaved: (value) => setState(() => description = value),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Username cannot be empty";
+              return "Description cannot be empty";
+            }
+            return null;
+          },
+        ),
+      );
+
+  Widget get contactInformationField => Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: "Contact Information",
+            hintText: "Enter contact information",
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black54),
+            ),
+            // Additional styling
+            filled: true,
+            fillColor: Colors.white,
+          ),
+          onSaved: (value) => setState(() => contactInformation = value),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Contact information cannot be empty";
             }
             return null;
           },
@@ -184,20 +189,9 @@ class _SignUpState extends State<SignUpPage> {
             filled: true,
             fillColor: Colors.white,
             labelText: "Email",
-            hintText: "juandelacruz09@gmail.com",
+            hintText: "Enter email",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.black),
-            ),
-            labelStyle: const TextStyle(
-              color: Colors.black,
             ),
           ),
           onSaved: (value) => setState(() => email = value),
@@ -223,18 +217,6 @@ class _SignUpState extends State<SignUpPage> {
             hintText: "At least 6 characters",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(
-              color: Colors.black,
             ),
           ),
           onSaved: (value) => setState(() => password = value),
@@ -250,74 +232,24 @@ class _SignUpState extends State<SignUpPage> {
         ),
       );
 
-  Widget get addressField => Padding(
+  Widget get proofOfLegitimacyField => Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: TextFormField(
           decoration: InputDecoration(
-            labelText: "Address",
-            hintText: "Enter an address",
+            labelText: "Proof of Legitimacy (File Upload)",
+            hintText: "Upload organization legitimacy proof",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.black54),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
+            // Additional styling
             filled: true,
             fillColor: Colors.white,
           ),
-          onSaved: (value) {
-            if (value != null && value.isNotEmpty) {
-              setState(() {
-                addresses!.add(value); // Add address to the addresses list
-              });
-            }
-          },
+          onSaved: (value) => setState(() => proofOfLegitimacy = value),
           validator: (value) {
             if (value == null || value.isEmpty) {
-              return "Address cannot be empty";
-            }
-            return null;
-          },
-        ),
-      );
-
-  Widget get contactNumberField => Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: TextFormField(
-          decoration: InputDecoration(
-            labelText: "Contact Information",
-            hintText: "Enter phone number",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black54),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.black),
-            ),
-            labelStyle: TextStyle(
-              color: Colors.black,
-            ),
-            filled: true,
-            fillColor: Colors.white,
-          ),
-          onSaved: (value) => setState(() => contactNumber = value),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Contact number cannot be empty";
+              return "Please upload proof of legitimacy";
             }
             return null;
           },
@@ -329,13 +261,13 @@ class _SignUpState extends State<SignUpPage> {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
             try {
-              await context.read<UserAuthProvider>().signUp(
-                    name!,
-                    username!,
+              await context.read<UserAuthProvider>().orgSignUp(
+                    organizationName!,
+                    description!,
+                    contactInformation!,
                     email!,
                     password!,
-                    addresses!,
-                    contactNumber!,
+                    proofOfLegitimacy!, // Assuming proof of legitimacy is required
                   );
               // Handle successful signup (navigate or show message)
               ScaffoldMessenger.of(context).showSnackBar(
@@ -383,18 +315,21 @@ class _SignUpState extends State<SignUpPage> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Click to join here as an",
-                style: TextStyle(color: Colors.white)),
+            const Text(
+              "Click to join here as a",
+              style: TextStyle(color: Colors.white),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const OrganizationSignUpPage()),
+                    builder: (context) => const SignUpPage(),
+                  ),
                 );
               },
               child: const Text(
-                "organization",
+                "donor",
                 style: TextStyle(
                   color: Color(0xFFFFC107),
                   fontWeight: FontWeight.bold,

@@ -1,9 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:week9_authentication/pages/splash_screen.dart';
+import 'package:week9_authentication/pages/userAdmin/splash_screen.dart';
 import 'firebase_options.dart';
-import 'pages/home_page.dart';
 import 'providers/todo_provider.dart';
 import 'providers/auth_provider.dart';
 

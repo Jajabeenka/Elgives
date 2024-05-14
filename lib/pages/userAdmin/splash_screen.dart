@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:week9_authentication/pages/home_page.dart';
-import 'package:week9_authentication/pages/signup_page.dart';
+import 'package:week9_authentication/pages/userAdmin/home_page.dart';
+import 'package:week9_authentication/pages/userAdmin/signup_page.dart';
 
 class SplashScreen extends StatefulWidget {
   final Widget? child;
