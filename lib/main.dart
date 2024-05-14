@@ -5,6 +5,17 @@ import 'package:week9_authentication/pages/userAdmin/splash_screen.dart';
 import 'firebase_options.dart';
 import 'providers/todo_provider.dart';
 import 'providers/auth_provider.dart';
+import 'package:elgives/pages/donor/profilePage.dart';
+import 'package:elgives/provider/donor_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart'; 
+import 'pages/donor/donatePage.dart'; 
+import 'pages/donor/orgsPage.dart'; 
+import '../provider/orgs_provider.dart'; 
+import '../models/donation.dart'; 
+import 'firebase_options.dart';
+import 'provider/donation_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +27,10 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => TodoListProvider())),
-        ChangeNotifierProvider(create: ((context) => UserAuthProvider()))
+        ChangeNotifierProvider(create: ((context) => UserAuthProvider())),
+        ChangeNotifierProvider(create: ((context) => DonationProvider())),
+        ChangeNotifierProvider(create: ((context) => OrganizationProvider())),
+        ChangeNotifierProvider(create: ((context) => DonorProvider())),
       ],
       child: const MyApp(),
     ),
@@ -34,6 +48,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // '/': (context) => const HomePage(),
         '/': (context) => const SplashScreen(),
+        '/organizations': (context) => OrgsPage(),
+        '/donatePage': (context) => FormSample(),
+        '/donorProfile': (context) => ProfilePage(),
 
       },
       theme: ThemeData(
