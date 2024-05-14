@@ -1,10 +1,10 @@
-import 'package:elgives/pages/profilePage.dart';
+import 'package:elgives/pages/donor/profilePage.dart';
 import 'package:elgives/provider/donor_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart'; 
-import '../pages/donatePage.dart'; 
-import '../pages/orgsPage.dart'; 
+import 'pages/donor/donatePage.dart'; 
+import 'pages/donor/orgsPage.dart'; 
 import '../provider/orgs_provider.dart'; 
 import '../models/donation.dart'; 
 import 'firebase_options.dart';

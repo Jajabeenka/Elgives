@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import '../provider/donation_provider.dart';
-import '../slambook_widgets/time.dart';
-import '../slambook_widgets/weight.dart';
-import '../slambook_widgets/mode.dart';
-import '../slambook_widgets/address.dart';
-import '../slambook_widgets/date.dart';
-import '../slambook_widgets/item.dart';
-import '../slambook_widgets/drawer.dart';
-import '../slambook_widgets/contactNum.dart';
-import '../models/donation.dart'; // Import the Friend class
+import '../../provider/donation_provider.dart';
+import '../../slambook_widgets/time.dart';
+import '../../slambook_widgets/weight.dart';
+import '../../slambook_widgets/mode.dart';
+import '../../slambook_widgets/address.dart';
+import '../../slambook_widgets/date.dart';
+import '../../slambook_widgets/item.dart';
+import '../../slambook_widgets/drawer.dart';
+import '../../slambook_widgets/contactNum.dart';
+import '../../models/donation.dart'; // Import the Friend class
 import 'package:provider/provider.dart';
-import '../provider/orgs_provider.dart';
+import '../../provider/orgs_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../models/donation.dart';
+import '../../models/donation.dart';
 
 
 class FormSample extends StatefulWidget {

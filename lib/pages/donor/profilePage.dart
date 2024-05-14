@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../models/donor.dart';
-import '../provider/donor_provider.dart';
-import '../slambook_widgets/drawer.dart';
+import '../../models/donor.dart';
+import '../../provider/donor_provider.dart';
+import '../../slambook_widgets/drawer.dart';
 
 class ProfilePage extends StatelessWidget {
   

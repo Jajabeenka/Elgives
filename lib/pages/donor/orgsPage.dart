@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../models/organization.dart';
-import '../pages/donatePage.dart';
-import '../models/donation.dart';
-import '../slambook_widgets/drawer.dart';
+import '../../models/organization.dart';
+import 'donatePage.dart';
+import '../../models/donation.dart';
+import '../../slambook_widgets/drawer.dart';
 import 'package:provider/provider.dart';
-import '../provider/orgs_provider.dart';
+import '../../provider/orgs_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class OrgsPage extends StatelessWidget {
