@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC319c-4_k-T_617jqQMCIToXl9TwgZHzQ',
-    appId: '1:63376358868:android:abf8a7d2e4bb5c0197ea41',
+    appId: '1:63376358868:android:86ffbdb670a20e1097ea41',
     messagingSenderId: '63376358868',
     projectId: 'cmsc-23-project-4cdeb',
     storageBucket: 'cmsc-23-project-4cdeb.appspot.com',
@@ -59,31 +59,30 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD28-niHrNP6q2P3Py8th0LfjAHA0DJvb8',
-    appId: '1:63376358868:ios:9cc28c339dc0658c97ea41',
+    appId: '1:63376358868:ios:742f2896c367f67f97ea41',
     messagingSenderId: '63376358868',
     projectId: 'cmsc-23-project-4cdeb',
     storageBucket: 'cmsc-23-project-4cdeb.appspot.com',
-    iosClientId: '63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com',
-    iosBundleId: 'com.example.elgives',
+    iosClientId: '63376358868-8a7pqa7qk4vrv00qpo7psgvics5toi61.apps.googleusercontent.com',
+    iosBundleId: 'com.example.week9Authentication',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD28-niHrNP6q2P3Py8th0LfjAHA0DJvb8',
-    appId: '1:63376358868:ios:9cc28c339dc0658c97ea41',
+    appId: '1:63376358868:ios:742f2896c367f67f97ea41',
     messagingSenderId: '63376358868',
     projectId: 'cmsc-23-project-4cdeb',
     storageBucket: 'cmsc-23-project-4cdeb.appspot.com',
-    iosClientId: '63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com',
-    iosBundleId: 'com.example.elgives',
+    iosClientId: '63376358868-8a7pqa7qk4vrv00qpo7psgvics5toi61.apps.googleusercontent.com',
+    iosBundleId: 'com.example.week9Authentication',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyCIG9W84hBycSJwZr86wxpY_lkRq8StZkk',
-    appId: '1:63376358868:web:f81baf9054f88dda97ea41',
+    appId: '1:63376358868:web:6953f0aa7ba5367c97ea41',
     messagingSenderId: '63376358868',
     projectId: 'cmsc-23-project-4cdeb',
     authDomain: 'cmsc-23-project-4cdeb.firebaseapp.com',
     storageBucket: 'cmsc-23-project-4cdeb.appspot.com',
   );
-
 }

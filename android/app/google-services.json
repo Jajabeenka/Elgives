@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "63376358868-jlsocdjtjugsqikt9ru8r1e5a3lsnvh8.apps.googleusercontent.com",
+              "client_id": "63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.elgives"
               }
             }
           ]
@@ -67,10 +67,10 @@
               "client_type": 3
             },
             {
-              "client_id": "63376358868-jlsocdjtjugsqikt9ru8r1e5a3lsnvh8.apps.googleusercontent.com",
+              "client_id": "63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.elgives"
               }
             }
           ]
@@ -103,10 +103,46 @@
               "client_type": 3
             },
             {
-              "client_id": "63376358868-jlsocdjtjugsqikt9ru8r1e5a3lsnvh8.apps.googleusercontent.com",
+              "client_id": "63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.myApp"
+                "bundle_id": "com.example.elgives"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63376358868:android:86ffbdb670a20e1097ea41",
+        "android_client_info": {
+          "package_name": "com.example.week9_authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63376358868-fq1s6hb0dkt6mg30g4ckkput26mjca55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC319c-4_k-T_617jqQMCIToXl9TwgZHzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63376358868-fq1s6hb0dkt6mg30g4ckkput26mjca55.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63376358868-j70c0ebdr3t3gvcmgp4dq0pe760es7ro.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.elgives"
               }
             }
           ]
