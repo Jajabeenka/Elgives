@@ -293,7 +293,7 @@ class OrgProfile extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.all(6.0),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
