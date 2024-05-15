@@ -41,7 +41,6 @@ dependencies:
   firebase_auth: ^4.19.5
   font_awesome_flutter: ^9.2.0  # Use the latest version (replace with the desired version)
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
